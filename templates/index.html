@@ -1,0 +1,129 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Bot - AI Chess Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏆 Chess Bot - AI Championship</h1>
+            <p>Experience the future of chess with AI vs AI battles</p>
+        </header>
+        
+        <div class="main-content">
+            <!-- Game Board Section -->
+            <div class="board-section">
+                <div class="game-info">
+                    <div class="status-panel">
+                        <div class="turn-indicator">
+                            <span id="turn-display">White to Move</span>
+                        </div>
+                        <div class="game-status">
+                            <span id="status-display">Ready to Play</span>
+                        </div>
+                        <div class="material-balance">
+                            <span id="material-display">Material: Even</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="board" class="chess-board"></div>
+                
+                <div class="evaluation-bar">
+                    <div class="eval-container">
+                        <div id="eval-bar" class="eval-bar-fill"></div>
+                        <div class="eval-numbers">
+                            <span class="white-eval">+</span>
+                            <span id="eval-value">0.0</span>
+                            <span class="black-eval">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <div class="controls-section">
+                    <h3>🎮 Game Controls</h3>
+                    <div class="button-grid">
+                        <button id="new-game-btn" class="control-btn primary">
+                            🆕 New Game
+                        </button>
+                        <button id="ai-move-btn" class="control-btn secondary">
+                            🤖 AI Move
+                        </button>
+                        <button id="undo-btn" class="control-btn warning">
+                            ↶ Undo Move
+                        </button>
+                        <button id="flip-board-btn" class="control-btn info">
+                            🔄 Flip Board
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="ai-settings">
+                    <h3>⚙️ AI Settings</h3>
+                    <div class="setting-group">
+                        <label for="difficulty-select">Difficulty Level:</label>
+                        <select id="difficulty-select" class="setting-input">
+                            <option value="Easy">🟢 Easy</option>
+                            <option value="Medium" selected>🟡 Medium</option>
+                            <option value="Hard">🔴 Hard</option>
+                        </select>
+                    </div>
+                    
+                    <div class="ai-vs-ai-section">
+                        <h4>🔥 AI vs AI Battle</h4>
+                        <div class="setting-group">
+                            <label for="ai-speed">Speed (ms):</label>
+                            <input type="range" id="ai-speed" min="500" max="3000" value="1500" class="speed-slider">
+                            <span id="speed-display">1.5s</span>
+                        </div>
+                        <button id="start-ai-vs-ai" class="control-btn battle">
+                            ⚔️ Start AI Battle
+                        </button>
+                        <button id="stop-ai-vs-ai" class="control-btn danger" style="display: none;">
+                            ⏹️ Stop Battle
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="move-history">
+                    <h3>📋 Move History</h3>
+                    <div id="history-display" class="history-container"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Analytics Section -->
+        <div class="analytics-section">
+            <h2>📊 Game Analytics</h2>
+            <div class="charts-container">
+                <div class="chart-panel">
+                    <h3>Position Evaluation</h3>
+                    <div id="evaluation-chart"></div>
+                </div>
+                <div class="chart-panel">
+                    <h3>Material Balance</h3>
+                    <div id="material-chart"></div>
+                </div>
+                <div class="chart-panel">
+                    <h3>Move Times</h3>
+                    <div id="time-chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/chess-game.js') }}"></script>
+</body>
+</html>
