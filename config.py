@@ -15,7 +15,8 @@ class Config:
         MODELS_DIR = os.path.join(BASE_DIR, 'models')
     
     # Model settings
-    DEFAULT_MODEL_PATH = os.path.join(MODELS_DIR, 'chess_model.pkl')
+    # DEFAULT_MODEL_PATH = os.path.join(MODELS_DIR, 'chess_model.pkl')
+    DEFAULT_MODEL_PATH = os.path.join(MODELS_DIR, 'enhanced_chess_model.pkl')
     
     # Game settings
     DEFAULT_DIFFICULTY = "Medium"

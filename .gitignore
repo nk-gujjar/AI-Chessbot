@@ -1,4 +1,6 @@
 __pycache__/
 venv/
 .DS_Store
-
+# ./games/masters_games.pgn
+# ./games/test_games.pgn
+games/
