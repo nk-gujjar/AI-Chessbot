@@ -14,6 +14,9 @@ A comprehensive chess AI system combining neural networks, decision trees, and S
 
 ## Demo
 
+https://github.com/user-attachments/assets/f2d55404-670a-462a-8c13-e93db73eae97
+
+
 ## Installation
 
 ### Prerequisites
